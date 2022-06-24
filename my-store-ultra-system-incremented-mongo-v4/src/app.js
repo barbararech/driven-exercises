@@ -56,8 +56,7 @@ app.get("/products/:id", async (req, res) => {
 
 app.put("/products/:id", async (req, res) => {
   const id = req.params.id;
-  const product = req.body;
-  const validation = productSchema.validate(product, { abortEarly: false });
+  const validation = productSchema.validate(req.body, { abortEarly: false });
 
   if (validation.error) {
     console.log(validation.error.details);
@@ -166,8 +165,7 @@ app.post("/customers", async (req, res) => {
 });
 
 app.put("/customers/:id", async (req, res) => {
-  const customer = req.body;
-  const validation = customerSchema.validate(customer, { abortEarly: false });
+  const validation = customerSchema.validate(req.body, { abortEarly: false });
 
   if (validation.error) {
     console.log(validation.error.details);
