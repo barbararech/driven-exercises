@@ -56,6 +56,14 @@ app.get("/products/:id", async (req, res) => {
 
 app.put("/products/:id", async (req, res) => {
   const id = req.params.id;
+  const product = req.body;
+  const validation = productSchema.validate(product, { abortEarly: false });
+
+  if (validation.error) {
+    console.log(validation.error.details);
+    res.sendStatus(422);
+    return;
+  }
 
   try {
     const product = await db
@@ -83,7 +91,7 @@ app.post("/products", async (req, res) => {
   if (validation.error) {
     console.log(validation.error.details);
     res.sendStatus(422);
-    return
+    return;
   }
 
   try {
@@ -145,7 +153,7 @@ app.post("/customers", async (req, res) => {
   if (validation.error) {
     console.log(validation.error.details);
     res.sendStatus(422);
-    return
+    return;
   }
 
   try {
@@ -158,6 +166,15 @@ app.post("/customers", async (req, res) => {
 });
 
 app.put("/customers/:id", async (req, res) => {
+  const customer = req.body;
+  const validation = customerSchema.validate(customer, { abortEarly: false });
+
+  if (validation.error) {
+    console.log(validation.error.details);
+    res.sendStatus(422);
+    return;
+  }
+
   try {
     const id = req.params.id;
 
