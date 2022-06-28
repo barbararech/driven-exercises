@@ -72,6 +72,7 @@ app.post("/tickets", async (req, res) => {
 
   if (validation.error) {
     console.log(validation.error.details);
+    res.sendStatus(422);
   }
 
   try {
