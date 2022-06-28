@@ -19,7 +19,7 @@ app.post("/sign-up", async (req, res) => {
 
   const passwordHash = bcrypt.hashSync(password, 10);
 
-  await db.collection("users").insertOne({ ...user, senha: passwordHash });
+  await db.collection("users").insertOne({ ...user, password: passwordHash });
 
   // Insira o usuário no banco, criptografando a senha com bcrypt
 
@@ -32,7 +32,7 @@ app.post("/sign-in", async (req, res) => {
   const user = await db.collection("users").findOne({ email });
   // Busque o usuário no banco e valide a senha usando bcrypt
 
-  if (user && bcrypt.compareSync(password, user.senha)) {
+  if (user && bcrypt.compareSync(password, user.password)) {
     // Caso encontrado
     res.sendStatus(200);
   } else {
