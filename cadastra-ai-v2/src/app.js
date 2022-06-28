@@ -32,7 +32,7 @@ app.post("/sign-in", async (req, res) => {
   const user = await db.collection("users").findOne({ email });
   // Busque o usuário no banco e valide a senha usando bcrypt
 
-  if (user && bcrypt.compareSync(password, user.password)) {
+  if (user && bcrypt.compareSync(password, user.senha)) {
     // Caso encontrado
     res.sendStatus(200);
   } else {
